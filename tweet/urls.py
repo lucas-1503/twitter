@@ -2,5 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('profile/', views.home_view, name='profile' ),
+    path('<int:pk>/', views.profile_view, name='profile' ),
+    path('send_tweet', views.send_tweet, name='send_tweet')
 ]

@@ -23,7 +23,6 @@
             flex: 1;
             display: flex;
             justify-content: center;
-            align-items: center;
         }
         footer {
             margin-top: auto;
@@ -36,7 +35,7 @@
     </style>
 </head>
 <body>
-    <header>
+    <header style="background-color: #1DA1F2; color: white; height: 100px;">
         {% block header %}
         <!-- Header content goes here -->
         {% endblock %}
@@ -50,9 +49,12 @@
     <footer>
         <p>&copy; 2024 Twitter. All rights reserved.</p>
     </footer>
-
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.esm.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block scripts %}
+
+    {% endblock %}
 </body>
 </html>

@@ -4,6 +4,8 @@ from .models import Usuario
 
 class UsuarioForm(UserCreationForm):
     username = forms.CharField(
+        label='Usuário',  # Ajustando o label para 'Usuário'
+        label_suffix='', 
         widget=forms.TextInput(
             attrs={
                 "class":"form-control"
@@ -11,6 +13,8 @@ class UsuarioForm(UserCreationForm):
         )
     )
     email = forms.EmailField(
+        label='Email',  # Ajustando o label para 'Usuário'
+        label_suffix='', 
         widget=forms.EmailInput(
             attrs={
                 "class":"form-control"
@@ -18,6 +22,8 @@ class UsuarioForm(UserCreationForm):
         )
     )
     password1 = forms.CharField(
+        label='Senha',  # Ajustando o label para 'Usuário'
+        label_suffix='', 
         widget=forms.PasswordInput(
             attrs={
                 "class":"form-control"
@@ -25,6 +31,8 @@ class UsuarioForm(UserCreationForm):
         )
     )
     password2 = forms.CharField(
+        label='Confirmar senha',  # Ajustando o label para 'Usuário'
+        label_suffix='', 
         widget=forms.PasswordInput(
             attrs={
                 "class":"form-control"
@@ -57,3 +65,8 @@ class LoginForm(forms.Form):
             }
         )
     )
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['avatar']

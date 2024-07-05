@@ -1,1 +1,154 @@
-{% exstends base.html %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<div class="container-fluid text-center">
+    <div class="container-fluid mt-4">
+        <nav class="nav justify-content-center">
+            <a class="btn btn-light mx-2" href="{% url 'detail' %}">Perfil</a>
+            <a class="btn btn-light mx-2" href="{% url 'send_tweet' %}">Fazer Tweet</a>
+            <a class="btn btn-light mx-2" href="{% url 'logout' %}">Sair</a>
+        </nav>
+    </div>
+</div>
+{%  endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <aside class="col-md-2">
+            <h5>Usuários para você seguir</h5>
+            <div class="row">
+                {% for usuario in usuarios %}
+                <div class="col-6 mb-4">
+                    <div class="avatar-square text-center">
+                        {% if usuario.avatar %}
+                        <img src="{{ usuario.avatar.url }}" class="img-fluid rounded-circle mt-2 mb-2" alt="Avatar de {{ usuario.username }}" style="height: 100px; width: 100px;">
+                        {% else %}
+                        <img src="{% static 'img/avatar.jpg' %}" class="img-fluid rounded-circle mt-2 mb-2" alt="Avatar de {{ usuario.username }}" style="height: 100px; width: 100px;">
+                        {% endif %}
+                        <button type="button" class="btn btn-primary btn-follow" data-bs-toggle="modal" data-bs-target="#followModal" data-user-id="{{ usuario.id }}" data-username="{{ usuario.username }}">
+                            Seguir
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </aside>
+        <main class="col-md-10">
+            <div class="container mt-4">
+                {% if user.avatar %}
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-3">
+                        <img src="{{ user.avatar.url }}" class="img-fluid rounded-circle" alt="Avatar de {{ usuario.username }}" style="height: 200px; width: 200px;">
+                    </div>
+                    <div class="col-md-9">
+                        <h2>{{ user.username }}</h2>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#seguidoresModal">Seguidores: {{ user.followers.count }}</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#seguidosModal">Seguindo: {{ user.following.count }}</button>
+                    </div>
+                </div>
+                {% else %}
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-3">
+                        <img src="{% static 'img/avatar.jpg' %}" class="img-fluid rounded-circle" alt="Avatar de {{ usuario.username }}" style="height: 200px; width: 200px;">
+                    </div>
+                    <div class="col-md-9">
+                        <h2>{{ user.username }}</h2>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#seguidoresModal">Seguidores: {{ user.followers.count }}</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#seguidosModal">Seguindo: {{ user.following.count }}</button>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="followModal" tabindex="-1" aria-labelledby="followModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="followModalLabel">Seguir Usuário</h5>
+            </div>
+            <div class="modal-body">
+                Você deseja seguir <span id="modal-username"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <form id="follow-form" method="post" action="">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Seguir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="seguidoresModal" tabindex="-1" aria-labelledby="seguidoresModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="seguidoresModalLabel">Seguidores de {{ user.username }}</h5>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    {% for seguidor in seguidores %}
+                    <li>{{ seguidor.username }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="seguidosModal" tabindex="-1" aria-labelledby="seguidosModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="seguidosModalLabel">Usuários que {{ user.username }} está seguindo</h5>
+            </div>
+            <div class="modal-body">
+                <ul class="list-unstyled">
+                    {% for seguido in seguindo %}
+                    <li class="d-flex justify-content-between align-items-center mb-2">
+                        <span>{{ seguido.username }}</span>
+                        <form method="post" action="{% url 'unfollow_user' pk=seguido.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Deixar de Seguir</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var followModal = document.getElementById('followModal');
+        followModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var userId = button.getAttribute('data-user-id');
+            var username = button.getAttribute('data-username');
+            var modalUsername = followModal.querySelector('#modal-username');
+            var followForm = followModal.querySelector('#follow-form');
+            
+            modalUsername.textContent = username;
+            followForm.action = '{% url "follow_user" pk=0 %}'.replace('0', userId);
+        });
+    });
+</script>
+{% endblock %}

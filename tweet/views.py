@@ -1,23 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
+from user.models.user import Usuario
 
-# Create your views here.
-from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.messages import constants as messages
+@login_required
+def profile_view(request, pk):
+    user = get_object_or_404(Usuario, pk=pk)
+    seguidores = user.followers.all()
+    seguindo = request.user.following.all()
+    usuarios = Usuario.objects.exclude(pk=request.user.pk).exclude(pk__in=seguindo)
+    
+    context = {
+        'user': user,
+        'seguidores': seguidores,
+        'usuarios': usuarios,
+        'seguindo':seguindo,
+    }
+    return render(request, 'profile.html', context)
 
-def home_view(request):
-    if request.user.is_authenticated:
-        return redirect('profile')
-    
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        
-        if user is not None:
-            login(request, user)
-            return redirect('profile')
-        else:
-            messages.error(request, 'Invalid username or password.')
-    
-    return render(request, 'home.html')
+def send_tweet(request):
+    return render('profile')
