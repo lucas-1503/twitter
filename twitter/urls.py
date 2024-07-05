@@ -6,5 +6,5 @@ import tweet
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('user.urls')),
-    path('', include('tweet.urls')),
+    path('profile/', include('tweet.urls')),
 ]
