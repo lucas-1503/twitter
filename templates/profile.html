@@ -1,27 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/profile/profile.css' %}">
+{% endblock %}
+
 {% block header %}
-<div class="container-fluid text-center fixed-top">
+<div class="header container-fluid text-center fixed-top custom-header">
     <div class="container-fluid mt-4">
         <nav class="nav justify-content-center">
-            <a class="btn btn-light mx-2" href="{% url 'detail' %}">Perfil</a>
-            <a class="btn btn-light mx-2" href="{% url 'send_tweet' %}">Fazer Tweet</a>
-            <a class="btn btn-light mx-2" href="{% url 'logout' %}">Sair</a>
+            <a class="btn btn-light mx-2 header-btn" href="{% url 'detail' %}">Perfil</a>
+            <a class="btn btn-light mx-2 header-btn" href="{% url 'send_tweet' %}">Fazer Tweet</a>
+            <a class="btn btn-light mx-2 header-btn" href="{% url 'logout' %}">Sair</a>
         </nav>
     </div>
 </div>
-{%  endblock %}
+{% endblock %}
+
 
 {% block content %}
 
-<div class="container-fluid " style="max-height: 850px; overflow-y: hidden;">
+<div class="container-fluid conteudo mt-5 pt-3">
     <div class="row">
-        <aside class="col-md-2 border border-primary" style="height: 100vh;">
-            <h5 class="text-center pt-4 ">Usuários para você seguir</h5>
-            <div class="row">
+        <aside class="col-md-2 d-none d-md-block pt-3" style="height: 100vh;">
+            <h5 class="text-center pt-4 pb-3">Usuários para você seguir</h5>
+            <div class="row text-center">
                 {% for usuario in usuarios %}
-                <div class="col-6 mb-4">
+                <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
                     <div class="avatar-square text-center">
                         {% if usuario.avatar %}
                         <img src="{{ usuario.avatar.url }}" class="img-fluid rounded-circle mt-2 mb-2" alt="Avatar de {{ usuario.username }}" style="height: 80px; width: 80px;">
@@ -36,15 +41,15 @@
                 </div>
                 {% endfor %}
             </div>
-        </aside>
-        <main class="col-md-10 pt-4 ">
-            <div class="container pt-4 ">
+        </aside>        
+        <main class="col-md-10 col-12 pt-4">
+            <div class="container pt-4">
                 {% if user.avatar %}
                 <div class="row align-items-center mb-4">
-                    <div class="col-md-3">
+                    <div class="col-md-3 text-center text-md-start">
                         <img src="{{ user.avatar.url }}" class="img-fluid rounded-circle" alt="Avatar de {{ usuario.username }}" style="height: 200px; width: 200px;">
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9 text-center text-md-start">
                         <h2>{{ user.username }}</h2>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#seguidoresModal">Seguidores: {{ user.followers.count }}</button>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#seguidosModal">Seguindo: {{ user.following.count }}</button>
@@ -52,10 +57,10 @@
                 </div>
                 {% else %}
                 <div class="row align-items-center mb-4">
-                    <div class="col-md-3">
+                    <div class="col-md-3 text-center text-md-start">
                         <img src="{% static 'img/avatar.jpg' %}" class="img-fluid rounded-circle" alt="Avatar de {{ usuario.username }}" style="height: 200px; width: 200px;">
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9 text-center text-md-start">
                         <h2>{{ user.username }}</h2>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#seguidoresModal">Seguidores: {{ user.followers.count }}</button>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#seguidosModal">Seguindo: {{ user.following.count }}</button>
@@ -70,8 +75,12 @@
                         <div class="list-group-item mb-5 border border-primary rounded" style="max-height: 200px; overflow-y: auto;">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="d-flex">
-                                        <img src="{{ tweet.author.avatar.url }}" alt="" style="height: 30px; width: 30px;" class="rounded ">
+                                    <div class="d-flex align-items-center">
+                                        {% if tweet.author.avatar %}
+                                        <img src="{{ tweet.author.avatar.url }}" alt="" style="height: 30px; width: 30px;" class="rounded">
+                                        {% else %}
+                                        <img src="{% static 'img/avatar.jpg' %}" alt="" style="height: 30px; width: 30px;" class="rounded">
+                                        {% endif %}
                                         <h4 class="ms-3">{{ tweet.author.username }}</h4>
                                     </div>
                                     <div style="max-width: 600px;">
@@ -98,9 +107,10 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </main>        
     </div>
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="followModal" tabindex="-1" aria-labelledby="followModalLabel" aria-hidden="true">

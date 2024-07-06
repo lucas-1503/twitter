@@ -1,0 +1,9 @@
+.tweet-textarea {
+    width: 100%;
+    box-sizing: border-box;  /* Isso garante que o padding e o border sejam incluídos na largura total */
+}
+
+.form-group textarea {
+    height: calc(100vh - 300px); /* Calcula a altura do textarea em relação à altura da viewport menos a margem superior e inferior */
+    resize: none; /* Impede o redimensionamento do textarea pelo usuário */
+}

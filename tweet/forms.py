@@ -6,5 +6,8 @@ class TweetForm(forms.ModelForm):
         model = Tweet
         fields = ['content']
         widgets = {
-            'content': forms.Textarea(attrs={'rows': 3, 'placeholder': 'O que está acontecendo?'}),
+            'content': forms.Textarea(attrs={'rows': 3, 'placeholder': 'O que está acontecendo?', 'class': 'tweet-textarea'}),
+        }
+        labels = {
+            'content': '',
         }

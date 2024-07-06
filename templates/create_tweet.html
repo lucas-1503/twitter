@@ -1,12 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/create_tweet/create_tweet.css' %}">
+{% endblock %}
+
+{% block header %}
+<div class="container-fluid text-center custom-header">
+    <div class="container-fluid mt-4">
+        <nav class="nav justify-content-center">
+            <a class="btn btn-light mx-2" href="{% url 'profile' pk=user.pk %}">Voltar</a>
+            <a class="btn btn-light mx-2" href="{% url 'logout' %}">Sair</a>
+        </nav>
+    </div>
+</div>
+{%  endblock %}
+
 {% block content %}
 <div class="container mt-4">
     <h2>Novo Tweet</h2>
-    <form method="post">
+    <form method="post" action="{% url 'send_tweet' %}">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-group">
+            {{ form.content }}
+        </div>
         <button type="submit" class="btn btn-primary">Tweetar</button>
     </form>
 </div>

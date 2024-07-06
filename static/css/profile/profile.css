@@ -1,0 +1,124 @@
+.conteudo {
+    max-height: 850px;
+    overflow-y: hidden;
+}
+
+.header-btn {
+    font-size: 1rem; /* Tamanho padrão */
+}
+
+aside .avatar-square {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 576px) {
+    .header-btn {
+        font-size: 0.75rem; /* Tamanho menor para telas pequenas */
+        padding: 0.375rem 0.75rem; /* Ajuste de padding para manter a proporção */
+    }
+
+    .conteudo {
+        max-height: 600px;
+        overflow-y: auto;
+    }
+
+    aside {
+        display: none;
+    }
+
+    main {
+        width: 100%;
+    }
+    .text-center {
+        text-align: center !important;
+    }
+    .text-md-start {
+        text-align: center !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-btn {
+        font-size: 0.875rem; /* Tamanho médio para telas médias */
+        padding: 0.5rem 1rem; /* Ajuste de padding para manter a proporção */
+    }
+
+    .conteudo {
+        max-height: 700px;
+        overflow-y: auto;
+    }
+
+    aside {
+        display: none;
+    }
+
+    main {
+        width: 100%;
+    }
+    .text-md-start {
+        text-align: center !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .header-btn {
+        font-size: 0.9rem; /* Tamanho ligeiramente menor para telas um pouco maiores */
+        padding: 0.5rem 1rem; /* Ajuste de padding para manter a proporção */
+    }
+    .conteudo {
+        max-height: 800px;
+        overflow-y: auto;
+    }
+
+    aside {
+        display: none;
+    }
+
+    main {
+        width: 100%;
+    }
+    
+    .text-md-start {
+        text-align: center !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    aside .col-md-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .header-btn {
+        font-size: 1rem; /* Tamanho padrão para telas grandes */
+        padding: 0.5rem 1rem; /* Ajuste de padding para manter a proporção */
+    }
+    .conteudo {
+        max-height: 850px;
+        overflow-y: auto;
+    }
+
+    aside {
+        display: block;
+    }
+
+    main {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1201px) {
+    .conteudo {
+        max-height: 850px;
+        overflow-y: hidden;
+    }
+
+    aside {
+        display: block;
+    }
+
+    main {
+        width: 100%;
+    }
+}

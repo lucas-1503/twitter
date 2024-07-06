@@ -1,0 +1,67 @@
+/* static/css/custom.css */
+
+/* Estilos padrão para o header */
+.custom-header {
+    background-color: #1DA1F2;
+    color: white;
+    text-align: center; /* Centraliza o conteúdo do header */
+    transition: height 0.3s ease; /* Adiciona uma transição suave para a altura */
+}
+
+.custom-header h1 {
+    font-size: 1.5rem; /* Tamanho da fonte do título */
+    margin-bottom: 0.5rem; /* Espaçamento inferior do título */
+}
+
+.custom-header p {
+    font-size: 1rem; /* Tamanho da fonte do texto */
+    margin-bottom: 0; /* Remove margem inferior do parágrafo */
+}
+
+.custom-header img {
+    max-width: 100%;
+    height: auto;
+    max-height: 80px; /* Altura máxima da imagem */
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 576px) {
+    .custom-header {
+        padding: 0.5rem 0; /* Reduz padding em telas pequenas */
+        height: 110px; /* Altura menor para dispositivos menores */
+    }
+
+    .custom-header h1 {
+        font-size: 1.2rem; /* Reduz tamanho da fonte do título */
+    }
+
+    .custom-header p {
+        font-size: 0.8rem; /* Reduz tamanho da fonte do texto */
+    }
+
+    .custom-header img {
+        max-height: 60px; /* Reduz altura máxima da imagem */
+    }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+    .custom-header {
+        height: 150px; /* Altura intermediária para tablets */
+        padding: 40px;
+    }
+
+    .custom-header img {
+        max-height: 100px; /* Reduz altura máxima da imagem para tablets */
+    }
+}
+
+@media (min-width: 992px) {
+    .custom-header {
+        height: 180px; /* Altura maior para telas maiores */
+        padding: 60px;
+    }
+
+    .custom-header img {
+        max-height: 120px; /* Mantém altura máxima da imagem para telas maiores */
+    }
+}
