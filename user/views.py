@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages import constants as messages
+from tweet.models import Tweet
 
 from user.models.user import Usuario
 from .forms import LoginForm, UsuarioForm, AvatarForm
@@ -39,9 +40,13 @@ def detail_view(request):
     # Recupere o usuário logado
     usuario = request.user
 
-    # Renderize o template com os detalhes do usuário
+    # Recupere os tweets do usuário
+    tweets = Tweet.objects.filter(author=usuario).order_by('-created_at')
+
+    # Renderize o template com os detalhes do usuário e os tweets
     context = {
         'usuario': usuario,
+        'tweets': tweets,
     }
     return render(request, 'detail.html', context)
 

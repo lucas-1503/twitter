@@ -35,18 +35,18 @@
     </style>
 </head>
 <body>
-    <header style="background-color: #1DA1F2; color: white; height: 100px;">
+    <header class="fixed-top" style="background-color: #1DA1F2; color: white; height: 100px;">
         {% block header %}
         <!-- Header content goes here -->
         {% endblock %}
     </header>
-    <main>
+    <main class="mt-5 pt-5">
         {% block content %}
         <!-- Main content will go here -->
         {% endblock %}
     </main>
 
-    <footer>
+    <footer class="fixed-bottom">
         <p>&copy; 2024 Twitter. All rights reserved.</p>
     </footer>
     <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>

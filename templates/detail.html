@@ -17,10 +17,11 @@
 {% block content %}
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-6 offset-md-3">
+        <!-- Coluna de dados pessoais -->
+        <div class="col-md-4">
             <h1 class="text-center mb-3">Detalhes do Usuário</h1>
             <div class="card">
-                <div class="card-body">
+                <div class="card-body align-items-center">
                     <div class="text-center mb-4">
                         {% if usuario.avatar %}
                         <img src="{{ usuario.avatar.url }}" class="img-fluid rounded-circle" alt="Avatar de {{ usuario.username }}" style="height: 200px;">
@@ -33,10 +34,31 @@
                     <p class="text-center">Seguidores: {{ usuario.followers.count }}</p>
                     <p class="text-center">Seguindo: {{ usuario.following.count }}</p>
                     <!-- Botão para abrir modal de alteração de avatar -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Alterar foto
-                      </button>
+                     <div class="container">
+                        <div class="row">
+                            <button type="button" class="btn btn-primary col-sm " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Alterar foto
+                            </button>
+                        </div>
+                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Coluna de tweets -->
+        <div class="col-md-8">
+            <h1 class="text-center mb-3">Seus tweets</h1>
+            <div class="list-group ">
+                {% for tweet in tweets %}
+                <div class="list-group-item mb-5 border border-primary rounded">
+                    <p style="width: 100%; overflow-y: scroll; overflow-x: hidden;">{{ tweet.content }}</p>
+                    <p class="mb-1">{{ tweet.created_at }}</p>
+                    <form method="post" action="{% url 'delete_tweet' pk=tweet.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </form>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -44,28 +66,28 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Escolha uma foto</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-        <form method="post" enctype="multipart/form-data" action="{% url 'alterar_avatar' %}">
-            {% csrf_token %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Escolha uma foto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label for="id_avatar">Escolha uma nova imagem:</label>
-                    <input type="file" class="form-control-file" id="id_avatar" name="avatar">
-                </div>
+                <form method="post" enctype="multipart/form-data" action="{% url 'alterar_avatar' %}">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="id_avatar">Escolha uma nova imagem:</label>
+                            <input type="file" class="form-control-file" id="id_avatar" name="avatar">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-primary">Salvar</button>
-            </div>
-        </form>
+        </div>
     </div>
-  </div>
-</div>
 </div>
 {% endblock %}
