@@ -42,3 +42,16 @@ def delete_tweet(request, pk):
         tweet.delete()
         # Redireciona para a página detalhada do usuário após a exclusão
         return redirect('detail')
+
+@login_required    
+def feed_view(request, pk ):
+    user = get_object_or_404(Usuario, pk=pk)
+    seguindo = request.user.following.all()
+    tweets = Tweet.objects.filter(author__in=seguindo).exclude(author = request.user).order_by('-created_at')
+
+    context = {
+        'user': user,
+        'seguindo':seguindo,
+        'tweets':tweets,
+    }
+    return render(request, 'feed.html', context)

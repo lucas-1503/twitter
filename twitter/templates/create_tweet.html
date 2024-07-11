@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/create_tweet/create_tweet.css' %}">
+{% endblock %}
+
+{% block header %}
+<div >
+    <div>
+        <nav class="nav justify-content-center align-items-center" style="height: 120px;">
+            <a class="btn btn-light mx-2 d-none d-md-inline-block" href="{% url 'detail' %}">Perfil</a>
+            <a class="btn btn-light mx-2 d-none d-md-inline-block" href="{% url 'send_tweet' %}">Tweet</a>
+            <a class="btn btn-light mx-2 d-none d-md-inline-block" href="{% url 'logout' %}">Sair</a>
+
+            <a class="btn btn-light mx-1 d-inline-block d-md-none" href="{% url 'profile' pk=user.pk  %}">Inicio</a>
+            <a class="btn btn-light mx-1 d-inline-block d-md-none" href="{% url 'feed' pk=user.pk %}">Feed</a>
+            <a class="btn btn-light mx-1 d-inline-block d-md-none" href="{% url 'detail' %}">Perfil</a>
+            <a class="btn btn-light mx-1 d-inline-block d-md-none" href="{% url 'logout' %}">Sair</a>
+        </nav>
+    </div>
+</div>
+{%  endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Novo Tweet</h2>
+    <form method="post" action="{% url 'send_tweet' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.content }}
+        </div>
+        <button type="submit" class="btn btn-primary">Tweetar</button>
+    </form>
+</div>
+{% endblock %}

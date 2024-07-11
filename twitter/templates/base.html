@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Project{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base/base.css' %}">
+    {% block css %}
+
+    {% endblock %}
+</head>
+<body style="padding-top: 120px;">
+    <header class="container-fluid fixed-top" style="height: 120px; background-color: #1DA1F2; color: white;">
+        {% block header %}
+                
+        {% endblock %}
+    </header>
+    <div class="container-fluid" >
+        {% block content %}
+        <!-- Main content will go here -->
+        {% endblock %}
+    </div>
+    <footer class="container-fluid fixed-bottom d-flex align-items-center justify-content-center" style="height: 80px; background-color: #1DA1F2; color: white;"> 
+        <p>&copy; 2024 Twitter. All rights reserved.</p>
+    </footer>
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.esm.min.js' %}"></script>
+    {% block scripts %}
+
+    {% endblock %}
+</body>
+</html>
