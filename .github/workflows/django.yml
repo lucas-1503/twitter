@@ -19,9 +19,9 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: django_db
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
+          POSTGRES_DB: tweeter
+          POSTGRES_USER: lucas
+          POSTGRES_PASSWORD: Lucas55418794*
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -33,9 +33,9 @@ jobs:
     env:
       DJANGO_SECRET_KEY: Lucas55418794*
       SQL_ENGINE: django.db.backends.postgresql
-      SQL_DATABASE: django_db
-      SQL_USER: user
-      SQL_PASSWORD: password
+      SQL_DATABASE: tweeter
+      SQL_USER: lucas
+      SQL_PASSWORD: Lucas55418794*
       SQL_HOST: postgres
       SQL_PORT: 5432
 
@@ -50,7 +50,7 @@ jobs:
       run: |
         python -m venv venv
         source venv/bin/activate
-        pip install --upgrade pip
+        python -m pip install -U pip
         pip install -r requirements.txt
     - name: Set up Database
       run: |
