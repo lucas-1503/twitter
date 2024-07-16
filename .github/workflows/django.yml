@@ -12,7 +12,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.8, 3.9, 3.10]
+        python-version: [3.8, 3.9, 3.10.12]
 
     services:
       postgres:
@@ -30,7 +30,7 @@ jobs:
           - 5432:5432
 
     env:
-      DJANGO_SECRET_KEY: 'Lucas55418794*'
+      DJANGO_SECRET_KEY: 'default-secret-key'
       DJANGO_DEBUG: 'True'
       DJANGO_ALLOWED_HOSTS: '0.0.0.0,localhost'
       SQL_ENGINE: django.db.backends.postgresql
