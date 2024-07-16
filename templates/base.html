@@ -1,36 +1,38 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Project{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap-grid.min.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/base/base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css' %}">
     {% block css %}
 
     {% endblock %}
 </head>
-<body style="padding-top: 120px;">
-    <header class="container-fluid fixed-top" style="height: 120px; background-color: #1DA1F2; color: white;">
+<body >
+    <header>
         {% block header %}
                 
         {% endblock %}
     </header>
-    <div class="container-fluid" >
+    <div class="conteudo">
         {% block content %}
         <!-- Main content will go here -->
         {% endblock %}
     </div>
-    <footer class="container-fluid fixed-bottom d-flex align-items-center justify-content-center" style="height: 80px; background-color: #1DA1F2; color: white;"> 
+    <footer > 
         <p>&copy; 2024 Twitter. All rights reserved.</p>
     </footer>
     <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.esm.min.js' %}"></script>
     {% block scripts %}
 
     {% endblock %}

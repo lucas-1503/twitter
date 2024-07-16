@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'css/register/register.css' %}">
+
+{% endblock %}
+
+{% block header %}
+        <div class="header-content" >
+            <div >
+                <img class="img" src="{% static 'img/twitter.png' %}" alt="Twitter Logo " >
+            </div>
+            <div >
+                <h1>Twitter</h1>
+            </div>
+        </div>
+{% endblock %}
+
+{% block content %}
+    <div class="conteudo">
+        <form method="POST" class="form-block">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form }}
+            </div>
+            <div class="form-button-group" >
+                <div class="form-button">
+                    <input type="submit" value="Cadastrar">
+                </div>
+                <div class="form-button">
+                    <a href="{% url 'home' %}">Já tem uma conta?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

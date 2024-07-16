@@ -21,3 +21,6 @@ class Usuario(AbstractUser):
         """Deixar de seguir um usuário"""
         if user != self:
             self.following.remove(user)
+
+    class Meta:
+        db_table = 'user'

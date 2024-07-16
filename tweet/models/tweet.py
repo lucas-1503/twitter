@@ -10,4 +10,7 @@ class Tweet(models.Model):
     def __str__(self):
         return f'{self.author.username}: {self.content[:50]}'
     
+    class Meta:
+        db_table = 'tweet'
+    
     

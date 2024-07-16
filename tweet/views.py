@@ -5,23 +5,6 @@ from .forms import TweetForm
 from tweet.models import Tweet
 
 @login_required
-def profile_view(request, pk):
-    user = get_object_or_404(Usuario, pk=pk)
-    seguidores = user.followers.all()
-    seguindo = request.user.following.all()
-    usuarios = Usuario.objects.exclude(pk=request.user.pk).exclude(pk__in=seguindo)
-    tweets = Tweet.objects.filter(author__in=seguindo).exclude(author = request.user).order_by('-created_at')
-    
-    context = {
-        'user': user,
-        'seguidores': seguidores,
-        'usuarios': usuarios,
-        'seguindo':seguindo,
-        'tweets':tweets,
-    }
-    return render(request, 'profile.html', context)
-
-@login_required
 def send_tweet(request):
     if request.method == 'POST':
         form = TweetForm(request.POST)
@@ -35,23 +18,30 @@ def send_tweet(request):
     
     return render(request, 'create_tweet.html', {'form': form})
 
+@login_required 
 def delete_tweet(request, pk):
-    tweet = get_object_or_404(Tweet, pk=pk)
+    usuario = request.user
+    tweet = get_object_or_404(Tweet, pk=pk, author=usuario)
 
     if request.method == 'POST':
         tweet.delete()
-        # Redireciona para a página detalhada do usuário após a exclusão
         return redirect('detail')
+    
 
-@login_required    
-def feed_view(request, pk ):
-    user = get_object_or_404(Usuario, pk=pk)
-    seguindo = request.user.following.all()
-    tweets = Tweet.objects.filter(author__in=seguindo).exclude(author = request.user).order_by('-created_at')
+@login_required
+def tweet_update(request, pk):
+    tweet = get_object_or_404(Tweet, pk=pk, author=request.user)
+
+    if request.method == 'POST':
+        form = TweetForm(request.POST, instance=tweet)
+        if form.is_valid():
+            form.save()
+            return redirect('detail')
+    else:
+        form = TweetForm(instance=tweet)
 
     context = {
-        'user': user,
-        'seguindo':seguindo,
-        'tweets':tweets,
+        'form': form,
+        'tweet': tweet
     }
-    return render(request, 'feed.html', context)
+    return render(request, 'tweet_update.html', context)

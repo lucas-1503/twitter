@@ -1,0 +1,247 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header-content{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 6fr;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.icons{
+    font-size: 30px;
+}
+
+.header-content img{
+    height: 100px;
+}
+
+.header-content nav{
+    display: flex;
+    justify-content: end;
+}
+
+.header-content nav a{
+    background-color: white;
+    border: 1px solid #1DA1F2;
+    border-radius: 6px;
+    width: 80px;
+    height: 40px;
+    font-weight: bold;
+    color: #1DA1F2;
+    margin-left: 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-content nav a:hover{
+    background-color: #82c8f3;
+    color: white;
+}
+
+
+.content{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.profile-content{
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+}
+
+.imagem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    height: 250px;
+}
+
+.imagem img{
+    height: 150px;
+    width: 150px;
+    margin-bottom: 30px;
+}
+
+.profile-description{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    padding: 20px;
+}
+
+.tweet{
+    max-height:calc(100vh - 538px);
+    overflow-y: auto;
+}
+
+
+.tweets h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.excluir{
+    display: flex;
+    justify-content: end;
+}
+
+.botao-excluir{
+    border: none;
+    background-color: transparent;
+    font-size: 30px;
+    padding: 10px;
+}
+
+.item-lista{
+    border: 1px solid #1DA1F2;
+    border-radius: 10px;
+    height: 200px;
+    overflow-y: auto;
+    margin-top: 20px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+} 
+
+.tweet-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+.mensagem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.comentario{
+    height: 180px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.comentario-comentarios{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+
+}
+@media (max-width: 299px){
+    .header-content{
+        max-width: 280px;
+        width: 100%;
+        font-size: 10px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .header-content h1{
+        display: none;
+    }
+    .header-content img{
+        height: 80px;
+    }
+    
+    .header-content nav{
+        max-width: 180px;
+    }
+    .imagem{
+        padding: 0;
+        width: 100px;
+    }
+
+    .imagem img{
+        height: 80px;
+        width: 80px;
+    }
+
+    .imagem button{
+        width: 80px;
+        font-size: 12px;
+    }
+    .profile-description{
+        font-size: 12px;
+        padding: 0;
+        padding-left: 10px;
+    }
+    .botao-excluir{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 395px) and (min-width:300px){
+    .header-content{
+        max-width: 380px;
+        width: 100%;
+        font-size: 10px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .header-content h1{
+        display: none;
+    }
+    
+    .header-content nav{
+        max-width: 250px;
+    }
+    .imagem{
+        padding: 0;
+        width: 130px;
+    }
+    
+}
+
+
+/* Estilo para telas menores que 768px (celulares) */
+@media (max-width: 767px) and (min-width:400px){
+    .header-content{
+        font-size: 30px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .header-content h1{
+        display: none;
+    }
+    .header-content nav{
+        max-width: 300px;
+    }
+    .imagem{
+        padding: 0;
+        width: 170px;
+    }
+    
+}
+
+
+@media (max-width: 1024px) and (min-width:768px){
+    .header-content{
+        font-size: 30px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .imagem{
+        padding: 0;
+        width: 170px;
+    }
+}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/create_tweet/create_tweet.css' %}">
+{% endblock %}
+
+{% block header %}
+<div class="header-content" >
+    <div >
+        <img class="img" src="{% static 'img/twitter.png' %}" alt="Twitter Logo ">
+    </div>
+    <div >
+        <h1>Twitter</h1>
+    </div>
+    <div>
+        <nav >
+            <a href="{% url 'detail' %}"><i class="icons bi bi-person-bounding-box"></i></a>
+            <a href="{% url 'profile' pk=user.pk %}"><i class="icons bi bi-card-list text-primary"></i></a>
+            <a href="{% url 'user-list' pk=user.pk %}"><i class="icons bi bi-search text-primary"></i></a>
+            <a href="{% url 'logout' %}"><i class="icons bi bi-box-arrow-left text-primary"></i></a>
+        </nav>
+    </div>
+</div>
+{%  endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Novo Tweet</h2>
+    <form method="post" action="{% url 'send_tweet' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.content }}
+        </div>
+        <button type="submit" class="btn btn-primary">Tweetar</button>
+    </form>
+</div>
+{% endblock %}

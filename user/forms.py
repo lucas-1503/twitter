@@ -4,7 +4,25 @@ from .models import Usuario
 
 class UsuarioForm(UserCreationForm):
     username = forms.CharField(
-        label='Usuário',  # Ajustando o label para 'Usuário'
+        label='Usuário para login',  
+        label_suffix='', 
+        widget=forms.TextInput(
+            attrs={
+                "class":"form-control"
+            }
+        )
+    )
+    first_name = forms.CharField(
+        label='Primeiro nome',  
+        label_suffix='', 
+        widget=forms.TextInput(
+            attrs={
+                "class":"form-control"
+            }
+        )
+    )
+    last_name = forms.CharField(
+        label='Sobrenome',  
         label_suffix='', 
         widget=forms.TextInput(
             attrs={
@@ -13,7 +31,7 @@ class UsuarioForm(UserCreationForm):
         )
     )
     email = forms.EmailField(
-        label='Email',  # Ajustando o label para 'Usuário'
+        label='Email',  
         label_suffix='', 
         widget=forms.EmailInput(
             attrs={
@@ -22,7 +40,7 @@ class UsuarioForm(UserCreationForm):
         )
     )
     password1 = forms.CharField(
-        label='Senha',  # Ajustando o label para 'Usuário'
+        label='Senha',  
         label_suffix='', 
         widget=forms.PasswordInput(
             attrs={
@@ -31,7 +49,7 @@ class UsuarioForm(UserCreationForm):
         )
     )
     password2 = forms.CharField(
-        label='Confirmar senha',  # Ajustando o label para 'Usuário'
+        label='Confirmar senha',  
         label_suffix='', 
         widget=forms.PasswordInput(
             attrs={
@@ -42,7 +60,7 @@ class UsuarioForm(UserCreationForm):
     
     class Meta:
         model = Usuario
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username','first_name','last_name', 'email', 'password1', 'password2')
 
 from django import forms
 
