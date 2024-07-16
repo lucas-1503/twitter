@@ -8,12 +8,11 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.8, 3.9,3.10.12]
+        python-version: [3.8, 3.9, 3.10]
 
     services:
       postgres:
@@ -33,10 +32,10 @@ jobs:
     env:
       DJANGO_SECRET_KEY: Lucas55418794*
       SQL_ENGINE: django.db.backends.postgresql
-      SQL_DATABASE: tweeter
-      SQL_USER: lucas
-      SQL_PASSWORD: Lucas55418794*
-      SQL_HOST: postgres
+      SQL_DATABASE: django_db
+      SQL_USER: user
+      SQL_PASSWORD: password
+      SQL_HOST: localhost
       SQL_PORT: 5432
 
     steps:
@@ -52,11 +51,18 @@ jobs:
         source venv/bin/activate
         python -m pip install -U pip
         pip install -r requirements.txt
+
     - name: Set up Database
+      env:
+        DJANGO_SETTINGS_MODULE: your_project.settings
       run: |
         source venv/bin/activate
         python manage.py migrate
+
     - name: Run Tests
+      env:
+        DJANGO_SETTINGS_MODULE: your_project.settings
       run: |
         source venv/bin/activate
         python manage.py test
+
