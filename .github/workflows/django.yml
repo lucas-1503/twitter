@@ -12,7 +12,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.8, 3.9,3.10.12]
+        python-version: [3.7, 3.8, 3.9,3.10]
 
     services:
       postgres:
@@ -74,3 +74,4 @@ jobs:
       run: |
         source venv/bin/activate
         python manage.py test
+
