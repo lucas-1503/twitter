@@ -19,9 +19,9 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: tweeter
-          POSTGRES_USER: lucas
-          POSTGRES_PASSWORD: Lucas55418794*
+          POSTGRES_DB: django_db
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
