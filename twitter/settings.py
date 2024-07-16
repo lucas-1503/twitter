@@ -1,6 +1,10 @@
 from pathlib import Path
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -14,7 +18,7 @@ SECRET_KEY = 'django-insecure-a91-plddlgx(5ovn7380pc9qsdflqk-gsr@*&t9o5h_i418mn#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0','localhost']
 
 
 # Application definition
@@ -62,16 +66,15 @@ WSGI_APPLICATION = 'twitter.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tweeter',
-        'USER': 'lucas',
-        'PASSWORD': 'Lucas55418794*',
-        'HOST': 'localhost',  # ou o endereço do servidor PostgreSQL
-        'PORT': '5432',       # ou a porta usada pelo seu servidor PostgreSQL
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST'),
+        'PORT': os.getenv('POSTGRES_PORT'),
     }
 }
 
