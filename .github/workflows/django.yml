@@ -18,9 +18,9 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: django_db
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
+          POSTGRES_DB: tweeter
+          POSTGRES_USER: lucas
+          POSTGRES_PASSWORD: Lucas55418794*
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -33,12 +33,11 @@ jobs:
       DJANGO_SECRET_KEY: 'default-secret-key'
       DJANGO_DEBUG: 'True'
       DJANGO_ALLOWED_HOSTS: '0.0.0.0,localhost'
-      SQL_ENGINE: django.db.backends.postgresql
-      SQL_DATABASE: django_db
-      SQL_USER: user
-      SQL_PASSWORD: password
-      SQL_HOST: localhost
-      SQL_PORT: 5432
+      POSTGRES_DB: tweeter
+      POSTGRES_USER: lucas
+      POSTGRES_PASSWORD: Lucas55418794*
+      POSTGRES_HOST: localhost 
+      POSTGRES_PORT: 5432
 
     steps:
     - uses: actions/checkout@v4
@@ -62,16 +61,29 @@ jobs:
         done
 
     - name: Set up Database
-      env:
-        DJANGO_SETTINGS_MODULE: twitter.settings
       run: |
         source venv/bin/activate
+        export DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
+        export DJANGO_DEBUG=$DJANGO_DEBUG
+        export DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS
+        export POSTGRES_DB=$POSTGRES_DB
+        export POSTGRES_USER=$POSTGRES_USER
+        export POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+        export POSTGRES_HOST=$POSTGRES_HOST
+        export POSTGRES_PORT=$POSTGRES_PORT
         python manage.py migrate
 
     - name: Run Tests
-      env:
-        DJANGO_SETTINGS_MODULE: twitter.settings
       run: |
         source venv/bin/activate
+        export DJANGO_SECRET_KEY=$DJANGO_SECRET_KEY
+        export DJANGO_DEBUG=$DJANGO_DEBUG
+        export DJANGO_ALLOWED_HOSTS=$DJANGO_ALLOWED_HOSTS
+        export POSTGRES_DB=$POSTGRES_DB
+        export POSTGRES_USER=$POSTGRES_USER
+        export POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+        export POSTGRES_HOST=$POSTGRES_HOST
+        export POSTGRES_PORT=$POSTGRES_PORT
         python manage.py test
+
 
