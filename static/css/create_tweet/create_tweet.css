@@ -1,0 +1,153 @@
+.tweet-textarea {
+    width: 100%;
+    box-sizing: border-box;  /* Isso garante que o padding e o border sejam incluídos na largura total */
+}
+
+.form-group textarea {
+    height: calc(100vh - 500px); /* Calcula a altura do textarea em relação à altura da viewport menos a margem superior e inferior */
+    resize: none; /* Impede o redimensionamento do textarea pelo usuário */
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header-content{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 6fr;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.icons{
+    font-size: 30px;
+}
+
+.header-content img{
+    height: 100px;
+}
+
+.header-content nav{
+    display: flex;
+    justify-content: end;
+}
+
+.header-content nav a{
+    background-color: white;
+    border: 1px solid #1DA1F2;
+    border-radius: 6px;
+    width: 80px;
+    height: 40px;
+    font-weight: bold;
+    color: #1DA1F2;
+    margin-left: 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-content nav a:hover{
+    background-color: #82c8f3;
+    color: white;
+}
+
+@media (max-width: 299px){
+    .header-content{
+        max-width: 280px;
+        width: 100%;
+        font-size: 10px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .header-content h1{
+        display: none;
+    }
+    .header-content img{
+        height: 80px;
+    }
+    
+    .header-content nav{
+        max-width: 180px;
+    }
+    .imagem{
+        padding: 0;
+        width: 100px;
+    }
+
+    .imagem img{
+        height: 80px;
+        width: 80px;
+    }
+
+    .imagem button{
+        width: 80px;
+        font-size: 12px;
+    }
+    .profile-description{
+        font-size: 12px;
+        padding: 0;
+        padding-left: 10px;
+    }
+    .botao-excluir{
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 395px) and (min-width:300px){
+    .header-content{
+        max-width: 380px;
+        width: 100%;
+        font-size: 10px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .header-content h1{
+        display: none;
+    }
+    
+    .header-content nav{
+        max-width: 250px;
+    }
+    .imagem{
+        padding: 0;
+        width: 130px;
+    }
+    
+}
+
+
+/* Estilo para telas menores que 768px (celulares) */
+@media (max-width: 767px) and (min-width:400px){
+    .header-content{
+        font-size: 30px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .header-content h1{
+        display: none;
+    }
+    .header-content nav{
+        max-width: 300px;
+    }
+    .imagem{
+        padding: 0;
+        width: 170px;
+    }
+    
+}
+
+
+@media (max-width: 1024px) and (min-width:768px){
+    .header-content{
+        font-size: 30px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .imagem{
+        padding: 0;
+        width: 170px;
+    }
+}

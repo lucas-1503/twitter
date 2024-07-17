@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models.user import Usuario
+from .models import Tweet
 
 # Register your models here.
 
-admin.site.register(Usuario)
+admin.site.register(Tweet)

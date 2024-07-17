@@ -1,0 +1,328 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header-content{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 6fr;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.icons{
+    font-size: 30px;
+}
+
+.header-content img{
+    height: 100px;
+}
+
+.header-content nav{
+    display: flex;
+    justify-content: end;
+}
+
+.header-content nav a{
+    background-color: white;
+    border: 1px solid #1DA1F2;
+    border-radius: 6px;
+    width: 80px;
+    height: 40px;
+    font-weight: bold;
+    color: #1DA1F2;
+    margin-left: 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-content nav a:hover{
+    background-color: #82c8f3;
+    color: white;
+}
+
+.user-card img{
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+}
+
+.user-card{
+    display: flex;
+    padding: 30px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.card-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 500px;
+}
+.card-content h5{
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botoes{
+    max-width: 120px;
+    width: 100%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.botoes button{
+    width: 100%;
+    height: 60px;
+}
+
+#seguidores h4{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px
+}
+
+.filtro{
+    padding: 30px;
+}
+
+
+#seguidores {
+    max-height: 780px;
+    height: 100%; /* Fixando a altura */
+    overflow: hidden; /* Removendo o scroll */
+    display: flex;
+    flex-direction: column; /* Flexbox para distribuir o espaço */
+}
+
+.top {
+    padding: 30px;
+}
+
+.horizontal-scroll {
+    overflow-y: auto; /* Scroll vertical */
+    flex-grow: 1; /* Ocupa o espaço restante */
+}
+
+@media (max-width: 299px){
+    .header-content{
+        max-width: 280px;
+        width: 100%;
+        font-size: 10px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .header-content h1{
+        display: none;
+    }
+    .header-content img{
+        height: 80px;
+    }
+    
+    .header-content nav{
+        max-width: 180px;
+    }
+    .imagem{
+        padding: 0;
+        width: 100px;
+    }
+
+    .imagem img{
+        height: 80px;
+        width: 80px;
+    }
+
+    .imagem button{
+        width: 80px;
+        font-size: 12px;
+    }
+    .profile-description{
+        font-size: 12px;
+        padding: 0;
+        padding-left: 10px;
+    }
+
+    .botao-excluir{
+        font-size: 20px;
+    }
+    .item-lista{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 14px;
+    }
+    .top{
+        padding: 0;
+    }
+    .card-content{
+        max-width: 390px;
+        width: 100%;
+    }
+    .card-content h5{
+        max-width: 200px;
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+        padding-left: 10px;
+        font-size: 12px
+    }
+    .user-card{
+        display: grid;
+        grid-template-columns: 3fr 1fr ;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        max-width: 390px;
+        width: 100%;
+        padding: 20px;
+
+    }
+}
+
+@media (max-width: 395px) and (min-width:300px){
+    .header-content{
+        max-width: 380px;
+        width: 100%;
+        font-size: 10px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .header-content h1{
+        display: none;
+    }
+    
+    .header-content nav{
+        max-width: 250px;
+    }
+    .imagem{
+        padding: 0;
+        width: 130px;
+    }
+    .item-lista{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .card-content{
+        max-width: 390px;
+        width: 100%;
+    }
+    .card-content h5{
+        max-width: 200px;
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+        padding-left: 10px;
+    }
+    .user-card{
+        display: grid;
+        grid-template-columns: 3fr 1fr ;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        max-width: 390px;
+        width: 100%;
+        padding: 20px;
+    }
+    
+}
+
+
+/* Estilo para telas menores que 768px (celulares) */
+@media (max-width: 767px) and (min-width:400px){
+    .header-content{
+        font-size: 30px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .header-content h1{
+        display: none;
+    }
+    .header-content nav{
+        max-width: 300px;
+    }
+    .imagem{
+        padding: 0;
+        width: 170px;
+    }
+    .item-lista{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .card-content{
+        max-width: 390px;
+        width: 100%;
+    }
+    .card-content h5{
+        max-width: 200px;
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+        padding-left: 10px;
+    }
+    .user-card{
+        display: grid;
+        grid-template-columns: 3fr 1fr ;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        max-width: 540px;
+        width: 100%;
+        padding: 20px;
+    }
+    
+}
+
+
+@media (max-width: 1023px) and (min-width:768px){
+    .header-content{
+        font-size: 30px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .imagem{
+        padding: 0;
+        width: 170px;
+    }
+    .item-lista{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 20px;
+    }
+    #seguidores{
+        font-size: 30px;
+        max-height: 1100px;
+    }
+
+    .horizontal-scroll{
+        max-height: 1100px;
+        overflow-y: scroll;
+    }
+    .top h4{
+        font-size: 40px;
+    }
+
+    .botoes button{
+        font-size: 20px;
+    }
+    .botoes{
+        max-width: 180px;
+    }
+}
+
+@media (max-width: 1500px) and (min-width:1024px){
+    .filtro{
+        padding: 0;
+    }
+}

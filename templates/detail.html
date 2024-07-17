@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'css/detail/detail.css' %}">
+
+{% endblock %}
+
+{% block header %}
+    <div class="header-content" >
+        <div >
+            <img class="img" src="{% static 'img/twitter.png' %}" alt="Twitter Logo ">
+        </div>
+        <div >
+            <h1>Twitter</h1>
+        </div>
+        <div>
+            <nav >
+                <a class="botao" href= "{% url 'send_tweet' %}"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-send-check-fill" viewBox="0 0 16 16">
+                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+                    <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686"/>
+                  </svg>
+                </a>
+                <a class="botao" href="{% url 'profile' pk=user.pk %}"><i class="icons bi bi-card-list text-primary"></i></a>
+                <a class="botao" href="{% url 'user-list' pk=user.pk %}"><i class="icons bi bi-search text-primary"></i></a>
+                <a class="botao" href="{% url 'logout' %}"><i class="icons bi bi-box-arrow-left text-primary"></i></a>
+            </nav>
+        </div>
+    </div>
+{%  endblock %}
+    
+{% block content %}
+    
+<div class="content">
+    <div class="profile">
+        <div class="profile-content" >
+            <div class="imagem">
+                {% if usuario.avatar %}
+                <img src="{{ usuario.avatar.url }}" class="img-fluid rounded-circle" alt="Avatar de {{ usuario.username }}" >
+                {% else %}
+                <img src="{% static 'img/avatar.jpg' %}" class="img-fluid rounded-circle" alt="Avatar padrão">
+                {% endif %}
+                <div >
+                    <button type="button" class="btn btn-primary col-sm " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Alterar foto
+                    </button>
+                </div>
+            </div>
+            <div class="profile-description">
+                <h4 >@{{ usuario.username }}</h4>
+                <p >{{ usuario.email }}</p>
+                <p >Seguidores: {{ usuario.followers.count }}</p>
+                <p >Seguindo: {{ usuario.following.count }}</p>
+            </div>
+        </div>
+    </div>
+    <div id="tweets" class="tweets">
+        <h1 >Seus Tweets</h1>
+        <div class="tweet">
+            <div class="lista">
+                {% for tweet in tweets %}
+                {% if tweet %}
+                <div class="item-lista">
+                    <div class="lista-conteudo">
+                        <div class="excluir">
+                            <button class="botao-excluir" type="button" data-bs-toggle="modal" data-bs-target="#deleteTweetModal{{tweet.pk}}"><i class="bi bi-trash text-danger"></i></button>
+                            <button class="botao-excluir" type="button" data-bs-toggle="modal" data-bs-target="#updateTweetModal{{tweet.pk}}"><i class="bi bi-arrow-counterclockwise text-primary"></i></button>
+                        </div>
+                        <div class="tweet-content">
+                            <p>{{ tweet.content }}</p>
+                            <p>{{ tweet.created_at }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <p>Nenhum tweet registrado</p>
+                {% endif %}
+                <div class="modal fade" id="deleteTweetModal{{ tweet.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ tweet.pk }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel{{ tweet.pk }}">Deseja excluir esse Tweet?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="{% url 'delete_tweet' pk=tweet.pk %}">
+                                    {% csrf_token %}
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" type="submit">Confirmar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="updateTweetModal{{ tweet.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ tweet.pk }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="updateTweetModal{{ tweet.pk }}">Deseja alterar esse Tweet?</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="{% url 'update_tweet' pk=tweet.pk %}">
+                                    {% csrf_token %}
+                                    <textarea name="content" class="form-control" rows="3">{{ tweet.content }}</textarea>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" type="submit">Salvar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+    
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Escolha uma foto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data" action="{% url 'alterar_avatar' %}">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="file" class="form-control-file" id="id_avatar" name="avatar">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

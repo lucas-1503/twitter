@@ -1,0 +1,346 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header-content{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 6fr;
+    align-items: center;
+    padding-right: 30px;
+}
+
+.icons{
+    font-size: 30px;
+    color: #1DA1F2;
+    background-color: transparent;
+}
+
+.header-content img{
+    height: 100px;
+}
+
+.header-content nav{
+    display: flex;
+    justify-content: end;
+}
+
+.header-content nav a{
+    background-color: white;
+    border: 1px solid #1DA1F2;
+    border-radius: 6px;
+    width: 80px;
+    height: 40px;
+    font-weight: bold;
+    color: #1DA1F2;
+    margin-left: 10px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-content nav a:hover{
+    background-color: #82c8f3;
+    color: white;
+}
+
+
+.content{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: calc(100vh - 200px);
+    margin: 0 auto;
+}
+
+.tweets h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.avatar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+    height: 100%;
+    max-width: 400px;
+    overflow-x: auto;
+}
+
+
+.horizontal-scroll {
+    display: flex;
+    max-width: 1500px;
+    width: 100%;
+    height: 200px;
+    overflow-x: auto;
+}
+
+.user-card {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+}
+
+.user-card img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+.user-card h5 {
+    color: #1DA1F2;
+}
+
+.user-card button {
+    margin-top: 10px;
+}
+
+.no-user{
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    align-items: center;
+}
+
+.botao{
+    background-color: #1DA1F2;
+    border: none;
+    border-radius: 6px;
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botao:hover{
+    background-color: #5db6ee;
+}
+
+.botao2{
+    background-color: green;
+    border: none;
+    border-radius: 6px;
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botoes{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.tweet{
+    max-height:calc(100vh - 350px);
+    overflow-y: auto;
+}
+
+.item-lista{
+    border: 1px solid #1DA1F2;
+    border-radius: 10px;
+    height: 200px;
+    overflow-y: auto;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+} 
+
+.lista-conteudo{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    align-items: center;
+}
+
+.mensagem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lista-conteudo-perfil{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lista-conteudo-perfil img{
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+}
+
+.comentario{
+    height: 180px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.comentario-comentarios{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.comentario-comentar{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 10px;
+    padding: 20px;
+}
+
+.comentario-comentar input{
+    margin: 0 auto;
+    border-radius: 8px;
+    border: #1DA1F2 1px solid;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 299px){
+    .header-content{
+        max-width: 280px;
+        width: 100%;
+        font-size: 10px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .header-content h1{
+        display: none;
+    }
+    .header-content img{
+        height: 80px;
+    }
+    
+    .header-content nav{
+        max-width: 180px;
+    }
+    .imagem{
+        padding: 0;
+        width: 100px;
+    }
+
+    .imagem img{
+        height: 80px;
+        width: 80px;
+    }
+
+    .imagem button{
+        width: 80px;
+        font-size: 12px;
+    }
+    .profile-description{
+        font-size: 12px;
+        padding: 0;
+        padding-left: 10px;
+    }
+    .botao-excluir{
+        font-size: 20px;
+    }
+    .item-lista{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 395px) and (min-width:300px){
+    .header-content{
+        max-width: 380px;
+        width: 100%;
+        font-size: 10px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .header-content h1{
+        display: none;
+    }
+    
+    .header-content nav{
+        max-width: 250px;
+    }
+    .imagem{
+        padding: 0;
+        width: 130px;
+    }
+    .item-lista{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    
+}
+
+
+/* Estilo para telas menores que 768px (celulares) */
+@media (max-width: 767px) and (min-width:400px){
+    .header-content{
+        font-size: 30px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .header-content h1{
+        display: none;
+    }
+    .header-content nav{
+        max-width: 300px;
+    }
+    .imagem{
+        padding: 0;
+        width: 170px;
+    }
+    .item-lista{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    
+}
+
+
+@media (max-width: 1024px) and (min-width:768px){
+    .header-content{
+        font-size: 30px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .imagem{
+        padding: 0;
+        width: 170px;
+    }
+    .item-lista{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 20px;
+    }
+}

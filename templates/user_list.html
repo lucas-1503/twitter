@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/user_list/user_list.css' %}">
+{% endblock %}
+
+{% block header %}
+
+<div class="header-content" >
+    <div >
+        <img class="img" src="{% static 'img/twitter.png' %}" alt="Twitter Logo ">
+    </div>
+    <div >
+        <h1>Twitter</h1>
+    </div>
+    <div>
+        <nav >
+            <a href= "{% url 'send_tweet' %}"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-send-check-fill" viewBox="0 0 16 16">
+                <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 1.59 2.498C8 14 8 13 8 12.5a4.5 4.5 0 0 1 5.026-4.47zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+                <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686"/>
+              </svg>
+            </a>
+            <a href="{% url 'detail' %}"><i class="icons bi bi-person-bounding-box"></i></a>
+            <a class="nav-pc" href="{% url 'profile' pk=user.pk %}"><i class="icons bi bi-card-list text-primary"></i></a>
+            <a class="nav-pc" href="{% url 'logout' %}"><i class="icons bi bi-box-arrow-left text-primary"></i></a>
+        </nav>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<div id="seguidores">
+    <div class="top">
+        <h4 class="text-center" >Usuários cadastrados no sistema</h4>
+        <form class="filtro" method="GET" action="{% url 'user-list' pk=user.pk %}">
+            <div class="mb-3">
+                <label for="search-input" class="form-label">Buscar por nome:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="search-input" name="search" placeholder="Digite o nome do usuário">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="horizontal-scroll">
+        {% if usuarios %}
+            {% for usuario in usuarios %}
+                <div class="user-card">
+                    <div class="card-content">
+                        {% if usuario.avatar %}
+                            <img src="{{ usuario.avatar.url }}" alt="Avatar de {{ usuario.username }}">
+                        {% else %}
+                            <img src="{% static 'img/avatar.jpg' %}" alt="Avatar de {{ usuario.username }}">
+                        {% endif %}
+                        <h5>{{ usuario.first_name }} {{ usuario.last_name }}</h5>
+                    </div>
+                    <div class="botoes">
+                        {% if usuario in seguindo %}
+                        <button type="button" class="btn btn-danger btn-follow" data-bs-toggle="modal" data-bs-target="#unfollowModal" data-user-id="{{ usuario.id }}" data-username="{{ usuario.username }}">
+                            Deixar de seguir
+                        </button>
+                        {% else %}
+                        <button type="button" class="btn btn-primary btn-follow" data-bs-toggle="modal" data-bs-target="#followModal" data-user-id="{{ usuario.id }}" data-username="{{ usuario.username }}">
+                            Seguir
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="user-card">
+                <h5 style="color: #1DA1F2;">Nenhum usuario encontrado</h5>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Modal de Seguir Usuário -->
+<div class="modal fade" id="followModal" tabindex="-1" aria-labelledby="followModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="followModalLabel">Seguir Usuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Você deseja seguir <span id="follow-modal-username"></span>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <form id="follow-form" method="post" action="">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Seguir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Deixar de Seguir Usuário -->
+<div class="modal fade" id="unfollowModal" tabindex="-1" aria-labelledby="unfollowModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="unfollowModalLabel">Deixar de seguir <span id="unfollow-modal-username"></span>?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <form id="unfollow-form" method="post" action="">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Confirmar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var followModal = document.getElementById('followModal');
+        followModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var userId = button.getAttribute('data-user-id');
+            var username = button.getAttribute('data-username');
+            var modalUsername = followModal.querySelector('#follow-modal-username');
+            var followForm = followModal.querySelector('#follow-form');
+            
+            modalUsername.textContent = username;
+            followForm.action = '{% url "follow_user" pk=0 %}'.replace('0', userId);
+        });
+
+        var unfollowModal = document.getElementById('unfollowModal');
+        unfollowModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var userId = button.getAttribute('data-user-id');
+            var username = button.getAttribute('data-username');
+            var modalUsername = unfollowModal.querySelector('#unfollow-modal-username');
+            var unfollowForm = unfollowModal.querySelector('#unfollow-form');
+            
+            modalUsername.textContent = username;
+            unfollowForm.action = '{% url "unfollow_user" pk=0 %}'.replace('0', userId);
+        });
+    });
+</script>
+{% endblock %}

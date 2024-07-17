@@ -1,0 +1,7 @@
+node_modules
+myenv
+db.sqlite3
+.env
+db.json
+package-lock.json
+package.json

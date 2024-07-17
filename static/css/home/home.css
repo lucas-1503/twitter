@@ -1,0 +1,227 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.conteudo{
+    margin: 0;
+    padding: 0;
+    height: calc(100vh - 200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-block {
+    max-width: 800px;
+    height: 500px;
+    width: 100%;
+    margin: 0 auto; /* Centraliza o formulário horizontalmente */
+    padding: 50px;
+    border: 2px solid #1DA1F2;
+    border-radius: 30px;
+    background-color: #f9f9f9;
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-message{
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgb(241, 72, 72,0.7);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group label {
+    display: flex;
+    width: 150px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.form-group div{
+    width: 100%; /* Faz os elementos ocuparem 100% da largura do container */
+    padding: 10px;
+    box-sizing: border-box; /* Inclui o padding e border na largura total do elemento */
+}
+
+.form-group input{
+    background-color: white;
+    height: 30px;
+    width: 100%;
+    border: 1px solid #1DA1F2;;
+    border-radius: 6px;
+}
+
+.form-button-group{
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    padding-top: 60px;
+}
+
+.form-button input,
+.form-button a{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1DA1F2;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.form-button input:hover,
+.form-button a:hover {
+    background-color: #73beec;
+}
+
+.header-content{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 60px;
+}
+
+.header-content img{
+    height: 80px;
+}
+
+@media (max-width: 395px) {
+    .header-content{
+        font-size: 20px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .form-block{
+        max-width: 275px;
+        height: 350px;
+        width: 80%;
+        margin: 0 auto; 
+        padding: 30px;
+    }
+    .form-group input{
+        height: 30px;
+        width: 100%;
+    }
+    .form-group label {
+        display: flex;
+        max-width: 60px;
+        width: 100%;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .form-group div{
+        padding: 0;
+    }
+
+    .form-button-group{
+        display: block;
+        padding: 0;
+    }
+    .form-button input,
+    .form-button a{
+        font-size: 16px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        padding: 0;
+        height: 30px;
+    }
+}
+
+
+/* Estilo para telas menores que 768px (celulares) */
+@media (max-width: 768px) and (min-width:400px){
+    .header-content{
+        font-size: 30px;
+        justify-content: center;
+        padding-left: 0;
+    }
+    .form-block{
+        max-width: 400px;
+        height: 300px;
+        width: 80%;
+        margin: 0 auto; 
+        padding: 15px;
+    }
+    .form-group label {
+        display: flex;
+        width: 80px;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .form-group div{
+        padding: 0;
+    }
+
+    .form-button-group{
+        padding-top: 0;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .form-button input,
+    .form-button a{
+        font-size: 16px;
+        width: 100%;
+        margin: 0 auto;
+        margin-top: 10px;
+        text-align: center;
+    }
+}
+
+
+@media (max-width: 1024px) and (min-width:770px){
+    .form-block{
+        max-width: 800px;
+        height: 300px;
+        width: 80%;
+        margin: 0 auto; 
+        padding: 0;
+    }
+    .form-group label {
+        display: flex;
+        width: 120px;
+        margin-bottom: 5px;
+        font-weight: bold;
+        font-size: 28px;
+    }
+    .form-button-group{
+        padding-top: 0;
+    }
+
+    .error-message{
+        margin-top: 5px;
+        padding: 10px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    
+}
+
