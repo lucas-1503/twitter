@@ -24,10 +24,10 @@ def login_view(request):
                 login_django(request, user)
                 return redirect('profile', pk=user.pk) 
             else:
-                msg= "Usuário ou senha inválidos"
+                msg = "Usuário ou senha inválidos"
         else:
-            msg = "Formulário invalido"   
-    return render(request, 'home.html', {'form':form, 'msg':msg})
+            msg = "Formulário inválido"   
+    return render(request, 'home.html', {'form': form, 'msg': msg})
 
 def register_view(request):
     if request.method == 'POST':

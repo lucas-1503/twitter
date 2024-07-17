@@ -29,7 +29,7 @@ RUN npm install bootstrap
 COPY . .
 
 # Exponha a porta 8000 para permitir comunicação com o servidor
-EXPOSE 8000
+EXPOSE 5432
 
 # Comando para executar a aplicação
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:5432"]
